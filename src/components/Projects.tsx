@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ExternalLink, Github } from 'lucide-react';
-import { lazy, Suspense } from 'react';
+import OptimizedImage from './OptimizedImage';
 
 interface ProjectCardProps {
   title: string;
@@ -93,11 +93,9 @@ function ProjectCard({ title, description, tools, image, links, index }: Project
                  group w-full will-change-transform"
     >
       <div className="aspect-video overflow-hidden">
-        <img
+        <OptimizedImage
           src={image}
           alt={title}
-          loading="lazy"
-          decoding="async"
           className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-300"
         />
       </div>
@@ -162,7 +160,7 @@ export default function Projects() {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
           {projects.map((project, index) => (
-            <ProjectCard key={index} {...project} index={index} />
+            <ProjectCard key={project.title} {...project} index={index} />
           ))}
         </div>
       </div>
