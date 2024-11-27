@@ -7,17 +7,12 @@ interface OptimizedImageProps {
   className?: string;
 }
 
-const generateBlurDataUrl = () => {
-  return `data:image/svg+xml;base64,${Buffer.from(`
-    <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-      <rect width="100%" height="100%" fill="#1a1a1a"/>
-    </svg>
-  `).toString('base64')}`;
-};
+// Simple 1x1 pixel transparent SVG placeholder
+const PLACEHOLDER_SVG = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiMxYTFhMWEiLz48L3N2Zz4=";
 
 export default function OptimizedImage({ src, alt, className = '' }: OptimizedImageProps) {
   const [isLoading, setIsLoading] = useState(true);
-  const [currentSrc, setCurrentSrc] = useState(generateBlurDataUrl());
+  const [currentSrc, setCurrentSrc] = useState(PLACEHOLDER_SVG);
 
   useEffect(() => {
     const img = new Image();

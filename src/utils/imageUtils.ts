@@ -15,10 +15,5 @@ export const preloadImages = async (srcs: string[]): Promise<void> => {
   }
 };
 
-export const generateBlurHash = (width: number, height: number, color = '#1a1a1a'): string => {
-  return `data:image/svg+xml;base64,${Buffer.from(`
-    <svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg">
-      <rect width="100%" height="100%" fill="${color}"/>
-    </svg>
-  `).toString('base64')}`;
-};
+// Pre-encoded SVG placeholder
+export const PLACEHOLDER_SVG = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiMxYTFhMWEiLz48L3N2Zz4=";

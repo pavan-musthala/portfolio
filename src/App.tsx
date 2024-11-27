@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -10,20 +10,19 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 
 function App() {
-  const [darkMode, setDarkMode] = useState(true);
   const [activeSection, setActiveSection] = useState('home');
 
   useEffect(() => {
-    // Optimize scrolling performance
     const options = {
-      threshold: [0.2, 0.5, 0.8],
+      threshold: 0.1,
       rootMargin: '-10% 0px -10% 0px'
     };
 
     const handleIntersect = (entries: IntersectionObserverEntry[]) => {
       entries.forEach(entry => {
-        if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+        if (entry.isIntersecting) {
           setActiveSection(entry.target.id);
+          entry.target.classList.add('visible');
         }
       });
     };
@@ -34,32 +33,13 @@ function App() {
       observer.observe(section);
     });
 
-    // Add smooth scroll behavior
-    const handleScroll = () => {
-      document.body.style.setProperty('--scroll', (window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight)).toString());
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-
-    return () => {
-      observer.disconnect();
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
-  const toggleDarkMode = useCallback(() => {
-    setDarkMode(prev => !prev);
-    document.documentElement.classList.toggle('dark');
+    return () => observer.disconnect();
   }, []);
 
   return (
-    <div className={`min-h-screen flex flex-col ${darkMode ? 'dark' : ''} will-change-scroll`}>
-      <Navigation
-        activeSection={activeSection}
-        darkMode={darkMode}
-        toggleDarkMode={toggleDarkMode}
-      />
-      <main className="flex-grow bg-white dark:bg-black text-gray-800 dark:text-white">
+    <div className="min-h-screen bg-black text-white">
+      <Navigation activeSection={activeSection} />
+      <main>
         <Hero />
         <About />
         <Skills />
