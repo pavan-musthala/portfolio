@@ -145,7 +145,7 @@ function ProjectCard({ title, description, tools, image, links, index }: Project
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ delay: index * 0.1 + 0.4 }}
-          className="flex gap-3 sm:gap-4"
+          className="flex gap-3"
         >
           {links.live && (
             <motion.a
@@ -154,10 +154,12 @@ function ProjectCard({ title, description, tools, image, links, index }: Project
               href={links.live}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1 sm:gap-2 text-sm sm:text-base text-[#6a11cb] hover:text-[#2575fc] transition-colors"
+              className="p-2 rounded-full bg-gradient-to-br from-gray-900/50 to-black/50 border border-gray-800/50
+                       shadow-[0_0_15px_rgba(106,17,203,0.1)] hover:shadow-[0_0_20px_rgba(106,17,203,0.2)]
+                       text-[#6a11cb] hover:text-[#2575fc] transition-all duration-300"
+              aria-label="Live Demo"
             >
-              <ExternalLink className="w-4 h-4 sm:w-5 sm:h-5" />
-              Live Demo
+              <ExternalLink className="w-5 h-5" />
             </motion.a>
           )}
           <motion.a
@@ -166,10 +168,12 @@ function ProjectCard({ title, description, tools, image, links, index }: Project
             href={links.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1 sm:gap-2 text-sm sm:text-base text-[#6a11cb] hover:text-[#2575fc] transition-colors"
+            className="p-2 rounded-full bg-gradient-to-br from-gray-900/50 to-black/50 border border-gray-800/50
+                     shadow-[0_0_15px_rgba(106,17,203,0.1)] hover:shadow-[0_0_20px_rgba(106,17,203,0.2)]
+                     text-[#6a11cb] hover:text-[#2575fc] transition-all duration-300"
+            aria-label="View Code"
           >
-            <Github className="w-4 h-4 sm:w-5 sm:h-5" />
-            View Code
+            <Github className="w-5 h-5" />
           </motion.a>
         </motion.div>
       </div>
