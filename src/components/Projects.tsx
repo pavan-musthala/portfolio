@@ -90,7 +90,7 @@ function ProjectCard({ title, description, tools, image, links, index }: Project
       transition={{ duration: 0.3, delay: index * 0.1 }}
       className="overflow-hidden rounded-lg bg-gradient-to-br from-gray-900/50 to-black/50 border border-gray-800/50 backdrop-blur-sm
                  shadow-[0_0_15px_rgba(106,17,203,0.1)] hover:shadow-[0_0_20px_rgba(106,17,203,0.2)] transition-all duration-300
-                 group"
+                 group w-full"
     >
       <motion.div 
         whileHover={{ scale: 1.02 }}
@@ -105,13 +105,13 @@ function ProjectCard({ title, description, tools, image, links, index }: Project
           className="w-full h-full object-cover"
         />
       </motion.div>
-      <div className="p-6">
+      <div className="p-4 sm:p-6">
         <motion.h3 
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ delay: index * 0.1 + 0.2 }}
-          className="text-xl font-bold mb-2 bg-gradient-to-r from-[#6a11cb] to-[#2575fc] bg-clip-text text-transparent"
+          className="text-lg sm:text-xl font-bold mb-2 bg-gradient-to-r from-[#6a11cb] to-[#2575fc] bg-clip-text text-transparent"
         >
           {title}
         </motion.h3>
@@ -120,41 +120,24 @@ function ProjectCard({ title, description, tools, image, links, index }: Project
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ delay: index * 0.1 + 0.3 }}
-          className="text-gray-300 mb-4"
+          className="text-sm sm:text-base text-gray-300 mb-4 line-clamp-4 sm:line-clamp-none"
         >
           {description}
         </motion.p>
         <motion.div 
-          initial="hidden"
-          whileInView="visible"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          variants={{
-            visible: {
-              opacity: 1,
-              transition: {
-                staggerChildren: 0.1
-              }
-            },
-            hidden: {
-              opacity: 0
-            }
-          }}
+          transition={{ delay: index * 0.1 + 0.4 }}
           className="flex flex-wrap gap-2 mb-4"
         >
-          {tools.map((tool, idx) => (
-            <motion.span
-              key={idx}
-              variants={{
-                visible: { opacity: 1, y: 0 },
-                hidden: { opacity: 0, y: 10 }
-              }}
-              whileHover={{ scale: 1.05 }}
-              className="px-3 py-1 bg-gradient-to-br from-gray-900 to-black text-[#00ffcc] rounded-full text-sm 
-                       border border-[#6a11cb]/20 hover:border-[#2575fc]/40 transition-all duration-300
-                       shadow-[0_0_10px_rgba(106,17,203,0.1)] hover:shadow-[0_0_15px_rgba(106,17,203,0.2)]"
+          {tools.map((tool, i) => (
+            <span
+              key={i}
+              className="text-xs sm:text-sm px-2 py-1 rounded-full bg-gray-800/50 text-gray-300"
             >
               {tool}
-            </motion.span>
+            </span>
           ))}
         </motion.div>
         <motion.div 
@@ -162,34 +145,32 @@ function ProjectCard({ title, description, tools, image, links, index }: Project
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ delay: index * 0.1 + 0.4 }}
-          className="flex gap-4"
+          className="flex gap-3 sm:gap-4"
         >
+          {links.live && (
+            <motion.a
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              href={links.live}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1 sm:gap-2 text-sm sm:text-base text-[#6a11cb] hover:text-[#2575fc] transition-colors"
+            >
+              <ExternalLink className="w-4 h-4 sm:w-5 sm:h-5" />
+              Live Demo
+            </motion.a>
+          )}
           <motion.a
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
             href={links.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="p-2 rounded-full bg-gradient-to-br from-gray-900/50 to-black/50 border border-gray-800/50
-                     shadow-[0_0_15px_rgba(106,17,203,0.1)] hover:shadow-[0_0_20px_rgba(106,17,203,0.2)]
-                     text-[#00ffcc] hover:text-[#2575fc] transition-all duration-300"
+            className="flex items-center gap-1 sm:gap-2 text-sm sm:text-base text-[#6a11cb] hover:text-[#2575fc] transition-colors"
           >
-            <Github className="w-5 h-5" />
+            <Github className="w-4 h-4 sm:w-5 sm:h-5" />
+            View Code
           </motion.a>
-          {links.live && (
-            <motion.a
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-            href={links.live}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-2 rounded-full bg-gradient-to-br from-gray-900/50 to-black/50 border border-gray-800/50
-                     shadow-[0_0_15px_rgba(106,17,203,0.1)] hover:shadow-[0_0_20px_rgba(106,17,203,0.2)]
-                     text-[#00ffcc] hover:text-[#2575fc] transition-all duration-300"
-          >
-            <ExternalLink className="w-5 h-5" />
-          </motion.a>
-          )}
         </motion.div>
       </div>
     </motion.div>
@@ -198,17 +179,17 @@ function ProjectCard({ title, description, tools, image, links, index }: Project
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-20 bg-gradient-to-br from-gray-900 to-black">
-      <div className="container mx-auto px-6">
+    <section id="projects" className="py-12 sm:py-20 bg-gradient-to-br from-gray-900 to-black">
+      <div className="container mx-auto px-4 sm:px-6">
         <motion.h2
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-4xl font-bold text-center mb-16 bg-gradient-to-r from-[#6a11cb] to-[#2575fc] bg-clip-text text-transparent"
+          className="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-16 bg-gradient-to-r from-[#6a11cb] to-[#2575fc] bg-clip-text text-transparent"
         >
           Featured Projects
         </motion.h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
           {projects.map((project, index) => (
             <Suspense key={index} fallback={<div className="h-96 animate-pulse bg-gray-800 rounded-lg"></div>}>
               <ProjectCard {...project} index={index} />
