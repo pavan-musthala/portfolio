@@ -44,12 +44,6 @@ export default function Navigation({ activeSection, darkMode, toggleDarkMode }: 
               )}
             </a>
           ))}
-          <button
-            onClick={toggleDarkMode}
-            className="p-2 rounded-full bg-gradient-to-r from-purple-500/10 to-blue-500/10 hover:from-purple-500/20 hover:to-blue-500/20 transition-all duration-300"
-          >
-            {darkMode ? <Sun className="w-5 h-5 text-[#00ffcc]" /> : <Moon className="w-5 h-5 text-[#6a11cb]" />}
-          </button>
         </div>
       </div>
 
@@ -72,22 +66,6 @@ export default function Navigation({ activeSection, darkMode, toggleDarkMode }: 
               {section}
             </a>
           ))}
-          <button
-            onClick={toggleDarkMode}
-            className="flex items-center gap-2 text-sm uppercase tracking-wider text-gray-400 py-2"
-          >
-            {darkMode ? (
-              <>
-                <Sun className="w-5 h-5 text-[#00ffcc]" />
-                Light Mode
-              </>
-            ) : (
-              <>
-                <Moon className="w-5 h-5 text-[#6a11cb]" />
-                Dark Mode
-              </>
-            )}
-          </button>
         </div>
       </div>
     </nav>
